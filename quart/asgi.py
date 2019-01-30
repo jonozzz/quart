@@ -48,7 +48,7 @@ class ASGIHTTPConnection:
 
         return self.app.request_class(
             self.scope['method'], self.scope['scheme'], path,
-            self.scope['query_string'], headers,
+            self.scope['query_string'], headers, self.scope,
             max_content_length=self.app.config['MAX_CONTENT_LENGTH'],
             body_timeout=self.app.config['BODY_TIMEOUT'],
             send_push_promise=partial(self._send_push_promise, send),

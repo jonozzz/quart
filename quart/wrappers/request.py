@@ -124,6 +124,7 @@ class Request(BaseRequestWebsocket, JSONMixin):
             path: str,
             query_string: bytes,
             headers: CIMultiDict,
+            scope: dict,
             *,
             max_content_length: Optional[int]=None,
             body_timeout: Optional[int]=None,
@@ -147,6 +148,7 @@ class Request(BaseRequestWebsocket, JSONMixin):
                 off of this request (HTTP/2 feature).
         """
         super().__init__(method, scheme, path, query_string, headers)
+        self.scope = scope
         self.body_timeout = body_timeout
         self.body = self.body_class(self.content_length, max_content_length)
         self._form: Optional[MultiDict] = None
